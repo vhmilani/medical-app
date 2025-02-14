@@ -1,0 +1,25 @@
+# Diretórios e arquivos do Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Cache do Expo e arquivos temporários
+.expo/
+.expo-shared/
+web-build/
+dist/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.swp
+
+# Variáveis de ambiente
+.env
