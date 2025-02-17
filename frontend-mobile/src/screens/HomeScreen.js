@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 import { useGlobal } from '../context/GlobalContext';
-
-const specialties = ['Cardiologia', 'Dermatologia', 'Ortopedia', 'Pediatria', 'Psiquiatria'];
-const doctors = [
-  { id: '1', name: 'Dra. Renata Oliveira', specialty: 'Cardiologia' },
-  { id: '2', name: 'Dr. João Henrique', specialty: 'Ortopedia' },
-  { id: '3', name: 'Dra. Marina Souza', specialty: 'Pediatria' },
-];
+import { getDoctors } from '../services/doctorService';
 
 export default function HomeScreen({ navigation }) {
   const { role } = useGlobal();
+  const [doctors, setDoctors] = useState([]);
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+        const data = await getDoctors();
+        setDoctors(data);
+        setLoading(false);
+    };
+    fetchDoctors();
+  }, []);
 
   const filteredDoctors = selectedSpecialty
     ? doctors.filter((doctor) => doctor.specialty === selectedSpecialty)
     : doctors;
 
   const handleDoctorSelection = (doctor) => {
-    if (selectedDoctor?.id === doctor.id) {
+    if (selectedDoctor?._id === doctor._id) {
       setSelectedDoctor(null);
     } else {
       setSelectedDoctor(doctor);
@@ -48,27 +53,31 @@ export default function HomeScreen({ navigation }) {
         style={styles.picker}
         onValueChange={(itemValue) => setSelectedSpecialty(itemValue)}
       >
-        <Picker.Item label="Todas" value="" />
-        {specialties.map((specialty) => (
+      <Picker.Item label="Todas" value="" />
+        {[...new Set(doctors.map((d) => d.specialty))].map((specialty) => (
           <Picker.Item key={specialty} label={specialty} value={specialty} />
         ))}
       </Picker>
 
       {/* Lista de Médicos */}
       <Text style={styles.sectionTitle}>Médicos Disponíveis</Text>
-      <FlatList
-        data={filteredDoctors}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[styles.card, selectedDoctor?.id === item.id && styles.selectedCard]}
-            onPress={() => handleDoctorSelection(item)}
-          >
-            <Text style={styles.cardTitle}>{item.name}</Text>
-            <Text style={styles.cardSubtitle}>{item.specialty}</Text>
-          </TouchableOpacity>
-        )}
-      />
+        {loading ? (
+          <ActivityIndicator size="large" color="#007BFF" />
+      ) : (
+        <FlatList
+          data={filteredDoctors}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[styles.card, selectedDoctor?._id === item._id && styles.selectedCard]}
+                onPress={() => handleDoctorSelection(item)}
+              >
+                <Text style={styles.cardTitle}>{item.name}</Text>
+                <Text style={styles.cardSubtitle}>{item.specialty}</Text>
+              </TouchableOpacity>
+          )}
+        />
+      )}
 
       {/* Botões de Atalho */}
       <View style={styles.buttonContainer}>

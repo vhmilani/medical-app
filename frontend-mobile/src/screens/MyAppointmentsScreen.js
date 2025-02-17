@@ -1,29 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { getAppointments, confirmAppointment, cancelAppointment } from "../services/appointmentService";
 
-export default function MyAppointmentsScreen({ route }) {
-  const { token } = route.params;
-  const [appointments, setAppointments] = useState([]);
+export default function MyAppointmentsScreen({ navigation }) {
+  const [appointments, setAppointments] = useState([
+    { id: '1', doctor: 'Dr. João Silva', specialty: 'Cardiologista', date: '2025-03-10', time: '14:00' },
+    { id: '2', doctor: 'Dra. Maria Santos', specialty: 'Dermatologista', date: '2025-03-15', time: '09:30' },
+    { id: '3', doctor: 'Dr. Paulo Almeida', specialty: 'Ortopedista', date: '2025-03-18', time: '16:00' }
+  ]);
 
-  useEffect(() => {
-    fetchAppointments();
-  }, []);
-
-  const fetchAppointments = async () => {
-    const response = await getAppointments(token);
-    setAppointments(response);
-  };
-
-  const handleConfirm = async (id) => {
-    await confirmAppointment(token, id);
-    fetchAppointments();
-  };
-
-  const handleCancel = async (id) => {
-    await cancelAppointment(token, id);
-    fetchAppointments();
+  const handleCancel = (id) => {
+    Alert.alert("Consulta Cancelada", `Você cancelou a consulta com ID: ${id}`);
+    setAppointments(appointments.filter(appointment => appointment.id !== id));
   };
 
   const handleReschedule = (id) => {
