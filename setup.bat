@@ -6,24 +6,27 @@ echo 📦 Instalando dependências do sistema...
 winget install Node.js
 winget install MongoDB
 winget install Git
+winget install -e --id FireDaemon.OpenSSL
+
+set /p PASSWORD=Digite a senha para descriptografar o .env:
+
+openssl enc -aes-256-cbc -d -salt -in backend/.env.enc -out backend/.env -pass pass:%PASSWORD%
 
 :: 2️⃣ Configurar backend
 echo 🔧 Configurando backend...
 cd backend
-npm install
-copy .env.example .env
+call npm install
 net start MongoDB
-npm run migrate
+call npm run migrate
 start npm start
 cd ..
 
 :: 3️⃣ Configurar frontend
 echo 🎨 Configurando frontend...
 cd frontend-mobile
-npm install
-npx expo install
-start npm start
+call npm install
+call npx expo install
+start npx expo start --android
 cd ..
 
 echo ✅ Configuração concluída! O backend e o frontend estão rodando.
-pause
