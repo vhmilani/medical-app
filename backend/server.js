@@ -27,9 +27,6 @@ app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
 const authRoutes = require("./src/routes/authRoutes");
 app.use("/api/auth", authRoutes);
 
-const appointmentRoutes = require("./src/routes/appointmentRoutes");
-app.use("/api/appointments", appointmentRoutes);
-
 const chatbotRoutes = require("./src/routes/chatbotRoutes");
 app.use("/api/chatbot", chatbotRoutes);
 

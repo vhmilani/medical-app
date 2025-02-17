@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const Patient = require("../models/Patient");
+const Doctor = require("../models/Doctor");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -14,8 +16,15 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Cria o usuário
-    const newUser = new User({ email, password: hashedPassword, role, name, phone, crm, specialty });
-    await newUser.save();
+    if (role === "patient") {
+      const newPatient = new Patient({ email, password: hashedPassword, role, name, phone });
+      await newPatient.save();
+    }
+
+    if (role === "doctor") {
+      const newDoctor = new Doctor({ email, password: hashedPassword, role, name, phone, crm, specialty });
+      await newDoctor.save();
+    }
 
     res.status(201).json({ message: "Usuário registrado com sucesso!" });
   } catch (error) {
