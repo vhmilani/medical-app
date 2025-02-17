@@ -1,14 +1,6 @@
 @echo off
 echo 🚀 Iniciando a configuração do ambiente...
 
-:: 1️⃣ Verificar se o script está sendo executado como Administrador
-net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo ❌ Por favor, execute este script como Administrador!
-    pause
-    exit /b
-)
-
 :: 2️⃣ Verificar se o Node.js está instalado
 where npm >nul 2>&1
 if %errorLevel% neq 0 (
