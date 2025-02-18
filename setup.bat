@@ -44,7 +44,7 @@ echo 🎨 Instalando dependências do frontend...
 cd frontend-mobile
 call npm install
 call npx expo install
-start cmd /k "npx expo start --android"
+start cmd /k "npx expo run:android"
 cd ..
 
 echo ✅ Configuração concluída! O backend e o frontend estão rodando.
