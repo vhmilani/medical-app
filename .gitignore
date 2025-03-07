@@ -1,0 +1,31 @@
+# Dependências
+node_modules/
+package-lock.json
+yarn.lock
+
+# Pastas do Expo
+.expo/
+.expo-shared/
+build/
+web-build/
+
+# Logs e Cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+metro.config.js
+
+# Configuração do Editor
+.vscode/
+.idea/
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Variáveis Dinâmicas
+/frontend-mobile/src/config/api.js
