@@ -5,9 +5,20 @@ Além disso, não há intenção de infringir direitos autorais, marcas registra
 
 Caso haja qualquer preocupação ou necessidade de ajuste em relação a direitos de terceiros, pedimos que entre em contato para que possamos tomar as devidas providências.
 
+# Sobre #
+Segunda entrega do Projeto Integrador: Desenvolvimento de Sistemas Orientado a Dispositivos Móveis e Baseados na Web do curso de Tecnólogo em Análise e Desenvolvimento de Sistemas.
+
+### Grupo 02 ###
+  - Bruno de Oliveira Contaifer
+  - Carlos Eduardo Soares Pedro
+  - Cleiton Conde Pinto
+  - Gabrielle Trivelato Silva
+  - Victor Hugo MIlani
+
 # 1. Pré-Requisitos #
 Para a execução do nosso aplicativo Medical App, é necessário utilizar um dos seguintes métodos:
 
+  - Computador com Sistema Operacional Windows.
   - Emulador Android: Utilizando um dispositivo virtual (AVD) no Android Studio.
   - Smartphone Android: Executando o aplicativo via Expo Go.
 
