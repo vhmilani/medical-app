@@ -18,7 +18,7 @@ Segunda entrega do Projeto Integrador: Desenvolvimento de Sistemas Orientado a D
 # 1. Pré-Requisitos #
 Para a execução do nosso aplicativo Medical App, é necessário utilizar um dos seguintes métodos:
 
-  - Computador com Sistema Operacional Windows.
+  - Computador com Sistema Operacional Windows 10 1709 (build 16299) ou posterior.
   - Emulador Android: Utilizando um dispositivo virtual (AVD) no Android Studio.
   - Smartphone Android: Executando o aplicativo via Expo Go.
 
